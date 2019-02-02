@@ -4,10 +4,9 @@ import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.javafx.JavaFx
+import kotlin.coroutines.CoroutineContext
 
 class MillisElapsedCounter(private val observer: Observer) {
     fun start() {
@@ -27,7 +26,10 @@ class MillisElapsedCounter(private val observer: Observer) {
     }
 }
 
-class MyApp : Application(), MillisElapsedCounter.Observer {
+class MyApp : Application(), MillisElapsedCounter.Observer, CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.JavaFx
+
     private val button = Label().also { it.text = "waiting for 0s" }
 
     override fun start(primaryStage: Stage?) {
@@ -42,7 +44,9 @@ class MyApp : Application(), MillisElapsedCounter.Observer {
     }
 
     override fun notify(millisElapsed: Int) {
-        button.text = "waiting for ${millisElapsed / 1000}s"
+        launch {
+            button.text = "waiting for ${millisElapsed / 1000}s"
+        }
     }
 }
 
