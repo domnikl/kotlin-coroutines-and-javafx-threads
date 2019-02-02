@@ -8,9 +8,12 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.javafx.JavaFx
 import kotlin.coroutines.CoroutineContext
 
-class MillisElapsedCounter(private val observer: Observer) {
+class MillisElapsedCounter(private val observer: Observer) : CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
+
     fun start() {
-        GlobalScope.launch(Dispatchers.Default) {
+        launch {
             var millisElapsed = 0
 
             while (true) {
