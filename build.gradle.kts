@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.3.20"
+    kotlin("jvm") version "1.7.21"
 }
 
 group = "org.domnikl"
