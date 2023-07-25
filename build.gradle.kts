@@ -16,7 +16,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testCompile("junit", "junit", "4.13.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.6.4")
 }
 
